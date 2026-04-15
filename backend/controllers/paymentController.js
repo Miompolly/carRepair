@@ -8,7 +8,10 @@ exports.createPayment = async (req, res) => {
 
 // READ
 exports.getPayments = async (req, res) => {
-  const payments = await Payment.find().populate("serviceRecord");
+  const payments = await Payment.find().populate({
+    path: "serviceRecord",
+    populate: ["car", "service"],
+  });
   res.json(payments);
 };
 
